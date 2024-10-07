@@ -3,9 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>B-10-A6</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.12/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-<h1>hello world</h1>
+<body class="px-10">
+    <header>
+        <div class="navbar bg-base-100 justify-between">
+            <div class="flex ">
+              <a class="btn btn-ghost text-2xl">
+                <img src="images/logo.webp" alt="" srcset="">Peddy
+              </a>
+            </div>
+            <div class="flex gap-2">
+                <div class="navbar-center hidden lg:flex md:flex">
+                    <ul class="menu menu-horizontal px-1">
+                      <li><a>Home</a></li>
+                      <li><a>Shop</a></li>
+                      <li><a>Contact</a></li>
+                    </ul>
+                  </div>                
+            </div>
+            <div class="dropdown dropdown-end">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar border-solid border-gray-300">
+                  <div class="w-10 rounded-full ">
+                    <img
+                      alt=""
+                      src="https://img.icons8.com/small/32/gender-neutral-user.png" />
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex-col flex items-center py-8 gap-y-4">
+            <p class="text-lg font-bold">Bringing Families Together ❤️‍🔥</p>
+            <h1 class="text-6xl font-bold text-center">Your Path to Adoption <br> Starts Here</h1>
+            <p class="text-center font-semibold text-lg">It is a long established fact that a reader will be distracted by the readable content <br> of a page when looking  at its layout.</p>
+            <button class="btn btn-active btn-accent text-white">View More</button>
+            <img src="images/pet.webp" alt="">
+
+        </div>
+
+    </header>
+    <script src="js/index.js"></script>
 </body>
 </html>
