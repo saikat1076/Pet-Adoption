@@ -1,3 +1,10 @@
+const clickBtn = () => {
+    document.getElementById('spinner').style.display = "block";
+    setTimeout(function () {
+        loadCategoryCard(category)
+    },2000);    
+}
+
 const loadBtn = () =>{
     fetch("https://openapi.programming-hero.com/api/peddy/categories")
     .then((res) => res.json())
@@ -17,9 +24,8 @@ const displayBtn = (categories) =>{
     categories.forEach((item) => {
         console.log(item);
         const buttonContainer = document.createElement("div");
-        // div.classList = "px-14 lg:py-8 py-12 place-content-center text-xl font-bold"
         buttonContainer.innerHTML = `
-        <button onclick="loadCategoryCard('${item.category}')" class="btn px-14 lg:py-8 py-12 place-content-center text-xl font-bold"><img src="${item.category_icon}" alt="" srcset="">
+        <button onclick="clickBtn(); loadCategoryCard('${item.category}');" class="btn flex flex-col px-14 lg:py-8 py-12 place-content-center text-xl font-bold"><img src="${item.category_icon}" alt="" srcset="">
         <h1>${item.category} </h1></button>
 
         `        
@@ -37,7 +43,10 @@ const loadCards = () =>{
 
 
 const displayCards = (pets) => {
+    
+
     const cardContainer = document.getElementById("cards");
+
         cardContainer.innerHTML = "";
         pets.forEach((pet) => {
             console.log(pet);
@@ -56,7 +65,7 @@ const displayCards = (pets) => {
     <h2 class="card-title font-normal"><i class="fa-solid fa-venus"></i>Gender: ${pet.gender}</h2>
     <h2 class="card-title font-normal"><i class="fa-solid fa-dollar-sign"></i>Price: ${pet.price}$</h2>
     <div class="card-actions flex lg:gap-10 py-3">
-      <button class="btn w-[50px] border-slate-400"><i class="fa-regular fa-thumbs-up"></i></button>
+      <button onclick="clickLike(${pet.petId});" class="btn w-[50px] border-slate-400"><i class="fa-regular fa-thumbs-up"></i></button>
       <button class="btn lg:px-8 text-[#0E7A81] border-slate-400">Adopt</button>
       <button class="btn lg:px-5 text-[#0E7A81] border-slate-400">Details</button>
     </div>
@@ -65,7 +74,8 @@ const displayCards = (pets) => {
     cardContainer.append(card)
             
         });
-
+        document.getElementById('spinner').style.display = "none";
+        
 }
 
 
@@ -93,17 +103,7 @@ const displayCards = (pets) => {
 
 
 
-// const loadCard = () => {
-//     console.log('wow');
-    
-// }
-// document.getElementById('clickBtn').addEventListener("click", function(){
-//     document.getElementById('spinner').style.display = "block"; 
 
-//     setTimeout(function (){
-//         loadCard()
-//     },2000);    
-// })
     
 
 
