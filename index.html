@@ -7,8 +7,14 @@
     
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.12/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/56b78c60b2.js" crossorigin="anonymous"></script>
 </head>
-<body class="px-10">
+<style>
+  #spinner{
+    display: none;
+  }
+</style>
+<body class="lg:px-10 px-5">
     <header>
         <div class="navbar bg-base-100 justify-between">
             <div class="flex ">
@@ -37,14 +43,54 @@
         </div>
         <div class="flex-col flex items-center py-8 gap-y-4">
             <p class="text-lg font-bold">Bringing Families Together ❤️‍🔥</p>
-            <h1 class="text-6xl font-bold text-center">Your Path to Adoption <br> Starts Here</h1>
+            <h1 class="text-5xl font-bold text-center">Your Path to Adoption <br> Starts Here</h1>
             <p class="text-center font-semibold text-lg">It is a long established fact that a reader will be distracted by the readable content <br> of a page when looking  at its layout.</p>
             <button class="btn btn-active btn-accent text-white">View More</button>
             <img src="images/pet.webp" alt="">
-
         </div>
-
     </header>
-    <script src="js/index.js"></script>
+    <main id="showAll">
+        <section>
+            <div class="flex-col flex items-center py-8 gap-y-4">
+                <h2 class="text-3xl font-bold">Adopt  Your  Best Friend</h2>
+                <p class="text-lg text-center font-semibold">It is a long established fact that a reader will be distracted by the readable content <br> of a page when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
+            </div>
+            <nav id="categories-btn" class="lg:flex grid grid-cols-2 lg:justify-center gap-2 lg:gap-24"></nav>
+            <nav>
+              <div class="navbar bg-base-100 lg:px-24 px-0 py-10">
+                  <div class="navbar-start">
+                    <a class="text-2xl font-bold">Best Deal For you</a>
+                  </div>
+                  <div class="navbar-end">
+                    <button class="btn btn-active btn-accent text-white">Sort by Price</button>
+
+                  </div>
+                </div>
+              </nav>
+        </section>
+        <section>
+          <div id="spinner">
+            <span class="loading loading-bars loading-md"></span>
+            <span class="loading loading-bars loading-lg"></span>
+
+          </div>  
+        </section>
+        <section class="grid grid-cols-1 lg:grid-cols-5 gap-8 py-10">
+          <div class="lg:col-span-4">
+            <div id="cards" class="grid grid-cols-2 lg:grid-cols-3 gap-3">
+
+            </div>
+
+          </div>
+          <div class="lg:col-span-1 border-solid border border-slate-500">
+            <div class="grid grid-cols-2">
+
+            </div>
+          </div>
+        </section>
+        
+    </main>
+  <script src="js/index.js"></script>
+
 </body>
 </html>
