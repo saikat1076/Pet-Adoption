@@ -13,7 +13,12 @@
   #spinner{
     display: none;
   }
-</style>
+  .active{
+    border: 1.5px solid rgb(14, 122, 129);
+    border-radius: 40px;
+    background: rgb(162, 223, 228);
+  }
+  </style>
 <body class="lg:px-10 px-5">
     <header>
         <div class="navbar bg-base-100 justify-between">
@@ -75,7 +80,7 @@
 
           </div>  
         </section>
-        <section class="grid grid-cols-1 lg:grid-cols-5 gap-8 py-10">
+        <section id="sec1" class="grid grid-cols-1 lg:grid-cols-5 gap-8 py-10">
           <div class="lg:col-span-4">
             <div id="cards" class="grid grid-cols-2 lg:grid-cols-3 gap-3">
 
@@ -87,6 +92,21 @@
 
             </div>
           </div>
+        </section>
+        <section>
+          <!-- You can open the modal using ID.showModal() method -->
+<button class="btn hidden" onclick="customModal.showModal()">open modal</button>
+<dialog id="customModal" class="modal">
+  <div class="modal-box w-11/12 max-w-5xl">
+    <div id="content"></div>
+    <div class="modal-action flex justify-center max-w-5xl">
+      <form method="dialog">
+        <!-- if there is a button, it will close the modal -->
+        <button class="btn bg-[#b8f1f7]">cancel</button>
+      </form>
+    </div>
+  </div>
+</dialog>
         </section>
         
     </main>

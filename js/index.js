@@ -1,8 +1,17 @@
 const clickBtn = () => {
     document.getElementById('spinner').style.display = "block";
+
     setTimeout(function () {
         loadCategoryCard(category)
     },2000);    
+}
+const removeActiveClass = () => {
+    const buttons = document.getElementsByClassName('category-btn');
+    console.log(buttons);
+    for(let btn of buttons){
+        btn.classList.remove('active');
+    }
+    
 }
 
 const loadBtn = () =>{
@@ -12,11 +21,52 @@ const loadBtn = () =>{
     .catch((error) => console.log(error));
 };
 const loadCategoryCard = (category) => {
-    // alert(id)
     fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`)
     .then((res) => res.json())
-    .then((data) => displayCards(data.data))
+    .then((data) => {
+        removeActiveClass();
+        const activeBtn = document.getElementById(`btn-${category}`)
+        activeBtn.classList.add('active');
+        
+        displayCards(data.data)
+    })
     .catch((error) => console.log(error));
+}
+const loadDetails = async(id) =>{
+    console.log(id);
+    const url = `https://openapi.programming-hero.com/api/peddy/pet/${id}`
+    const res = await fetch(url);
+    const data = await res.json();
+    displayDetails(data.petData);
+}
+const displayDetails = (petData) => {
+    console.log(petData);
+    const DetailsContainer = document.getElementById("content");
+    DetailsContainer.innerHTML = `
+     <figure>
+    <img id="im" class="h-[250px] mx-auto py-2 rounded-s-xl"
+      src="${petData.image}"
+      alt="Shoes" />
+  </figure>
+  <div class="card-body pt-0 px-0">
+    <h2 class="card-title text-2xl">${petData.pet_name}</h2>
+    <h2 class="card-title font-normal"><i class="fa-solid fa-border-all"></i>Breed: ${petData.breed || "No Data Available"} </h2>
+    <h2 class="card-title font-normal"><i class="fa-solid fa-calendar-days"></i>Birth: ${petData.date_of_birth || "No Data Available"}</h2>
+    <h2 class="card-title font-normal"><i class="fa-solid fa-venus"></i>Gender: ${petData.gender || "No Data Available"}</h2>
+    <h2 class="card-title font-normal"><i class="fa-solid fa-dollar-sign"></i>Price: ${petData.price || "No Data Available"}$</h2>
+    <h1 class="card-title text-2xl">Details Information:</h1>
+        <h2 class="card-title font-normal">${petData.pet_details}</h2>
+
+    
+    `
+
+
+
+
+
+    document.getElementById("customModal").showModal();
+
+    
 }
 
 const displayBtn = (categories) =>{
@@ -25,7 +75,7 @@ const displayBtn = (categories) =>{
         console.log(item);
         const buttonContainer = document.createElement("div");
         buttonContainer.innerHTML = `
-        <button onclick="clickBtn(); loadCategoryCard('${item.category}');" class="btn flex flex-col px-14 lg:py-8 py-12 place-content-center text-xl font-bold"><img src="${item.category_icon}" alt="" srcset="">
+        <button id="btn-${item.category}" onclick="clickBtn(); loadCategoryCard('${item.category}');" class="btn flex flex-col px-14 lg:py-8 py-12 place-content-center text-xl font-bold category-btn"><img src="${item.category_icon}" alt="" srcset="">
         <h1>${item.category} </h1></button>
 
         `        
@@ -44,6 +94,19 @@ const loadCards = () =>{
 const displayCards = (pets) => {
     const cardContainer = document.getElementById("cards");
         cardContainer.innerHTML = "";
+        if (pets.length == 0) {
+            cardContainer.classList.remove("grid")
+            cardContainer.innerHTML = `
+            <div class="min-h-[300px] flex flex-col gap-5 justify-center items-center">
+            <img src="images/error.webp" />
+            <h2 class="text-3xl font-bold">No Information Available</h2>
+            <p class="text-center w-[600px]">It is a long established fact that a reader will be distracted by the readable content of a page when looking at 
+            its layout. The point of using Lorem Ipsum is that it has a.</p>
+            `
+        } else {
+            cardContainer.classList.add("grid")
+
+        }
         pets.forEach((pet) => {
             console.log(pet);
             const card = document.createElement("div")
@@ -56,14 +119,14 @@ const displayCards = (pets) => {
   </figure>
   <div class="card-body pt-0 px-3">
     <h2 class="card-title text-2xl">${pet.pet_name}</h2>
-    <h2 class="card-title font-normal"><i class="fa-solid fa-border-all"></i>Breed: ${pet.breed?.length == 0 ? "not" : pet.breed}; </h2>
-    <h2 class="card-title font-normal"><i class="fa-solid fa-calendar-days"></i>Birth: ${pet.date_of_birth}</h2>
-    <h2 class="card-title font-normal"><i class="fa-solid fa-venus"></i>Gender: ${pet.gender}</h2>
-    <h2 class="card-title font-normal"><i class="fa-solid fa-dollar-sign"></i>Price: ${pet.price}$</h2>
+    <h2 class="card-title font-normal"><i class="fa-solid fa-border-all"></i>Breed: ${pet.breed || "No Data Available"} </h2>
+    <h2 class="card-title font-normal"><i class="fa-solid fa-calendar-days"></i>Birth: ${pet.date_of_birth || "No Data Available"}</h2>
+    <h2 class="card-title font-normal"><i class="fa-solid fa-venus"></i>Gender: ${pet.gender || "No Data Available"}</h2>
+    <h2 class="card-title font-normal"><i class="fa-solid fa-dollar-sign"></i>Price: ${pet.price || "No Data Available"}$</h2>
     <div class="card-actions flex lg:gap-10 py-3">
       <button onclick="clickLike('${pet.image}');" class="btn w-[50px] border-slate-400"><i class="fa-regular fa-thumbs-up"></i></button>
       <button class="btn lg:px-8 text-[#0E7A81] border-slate-400">Adopt</button>
-      <button class="btn lg:px-5 text-[#0E7A81] border-slate-400">Details</button>
+      <button onclick="loadDetails(${pet.petId})" class="btn lg:px-5 text-[#0E7A81] border-slate-400">Details</button>
     </div>
   </div>
 `
