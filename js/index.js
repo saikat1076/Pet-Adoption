@@ -1,7 +1,9 @@
 const clickBtn = () => {
+    const clear = document.getElementById("sec1");
+    // clear.innerHTML = ``;
     document.getElementById('spinner').style.display = "block";
-
     setTimeout(function () {
+        
         loadCategoryCard(category)
     },2000);    
 }
@@ -39,6 +41,38 @@ const loadDetails = async(id) =>{
     const data = await res.json();
     displayDetails(data.petData);
 }
+const adoptBtn = () =>{
+    const btnContainer = document.getElementById("Adopt");
+    some();
+    document.getElementById("adoptModal").showModal();
+}
+    const some = () => {
+        const countdown = (seconds) => {
+          const countdownElement = document.getElementById('Adopt');
+          const countdown = document.getElementById('adoptCount');
+          const interval = setInterval(() => {
+            if (seconds >= 0) {
+              countdownElement.innerHTML = `
+       <figure>
+    <img id="im" class="h-[250px] mx-auto py-2 rounded-s-xl"
+      src="https://img.freepik.com/premium-vector/flat-style-background-business-handshake_1104738-186.jpg"
+      alt="Shoes" />
+  </figure>
+           <div>
+           <h1 class="text-5xl font-bold flex justify-center">${seconds}</h1>
+           </div>
+           `;
+              seconds--;
+            } else {
+              clearInterval(interval);
+            //   button.textContent = "Adopted";
+              countdown.classList.add("hidden");
+            }
+          }, 1000); // 1000 milliseconds = 1 second
+        };
+        countdown(3); // Call the countdown with 10 seconds (you can change this number)
+      };    
+
 const displayDetails = (petData) => {
     console.log(petData);
     const DetailsContainer = document.getElementById("content");
@@ -56,17 +90,8 @@ const displayDetails = (petData) => {
     <h2 class="card-title font-normal"><i class="fa-solid fa-dollar-sign"></i>Price: ${petData.price || "No Data Available"}$</h2>
     <h1 class="card-title text-2xl">Details Information:</h1>
         <h2 class="card-title font-normal">${petData.pet_details}</h2>
-
-    
     `
-
-
-
-
-
     document.getElementById("customModal").showModal();
-
-    
 }
 
 const displayBtn = (categories) =>{
@@ -97,10 +122,10 @@ const displayCards = (pets) => {
         if (pets.length == 0) {
             cardContainer.classList.remove("grid")
             cardContainer.innerHTML = `
-            <div class="min-h-[300px] flex flex-col gap-5 justify-center items-center">
+            <div class="min-h-[200px] flex flex-col gap-5 justify-center items-center">
             <img src="images/error.webp" />
             <h2 class="text-3xl font-bold">No Information Available</h2>
-            <p class="text-center w-[600px]">It is a long established fact that a reader will be distracted by the readable content of a page when looking at 
+            <p class="text-center w-2/3">It is a long established fact that a reader will be distracted by the readable content of a page when looking at 
             its layout. The point of using Lorem Ipsum is that it has a.</p>
             `
         } else {
@@ -125,17 +150,16 @@ const displayCards = (pets) => {
     <h2 class="card-title font-normal"><i class="fa-solid fa-dollar-sign"></i>Price: ${pet.price || "No Data Available"}$</h2>
     <div class="card-actions flex lg:gap-10 py-3">
       <button onclick="clickLike('${pet.image}');" class="btn w-[50px] border-slate-400"><i class="fa-regular fa-thumbs-up"></i></button>
-      <button class="btn lg:px-8 text-[#0E7A81] border-slate-400">Adopt</button>
+      <button onclick="adoptBtn()" class="btn lg:px-8 text-[#0E7A81] border-slate-400">Adopt</button>
       <button onclick="loadDetails(${pet.petId})" class="btn lg:px-5 text-[#0E7A81] border-slate-400">Details</button>
     </div>
   </div>
 `
-    cardContainer.append(card)
-            
+    cardContainer.append(card) 
         });
         document.getElementById('spinner').style.display = "none";
-        
 }
+
 const clickLike = (image) =>{
     console.log(image);
     const card3 = document.getElementById("cards-2")
@@ -147,6 +171,7 @@ const clickLike = (image) =>{
     `
     card3.append(imgContainer);
 }
+
 
 
 
