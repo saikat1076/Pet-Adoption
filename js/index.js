@@ -163,7 +163,7 @@ const displayCards = (pets) => {
     <h2 class="card-title font-normal"><i class="fa-solid fa-calendar-days"></i>Birth: ${pet.date_of_birth || "No Data Available"}</h2>
     <h2 class="card-title font-normal"><i class="fa-solid fa-venus"></i>Gender: ${pet.gender || "No Data Available"}</h2>
     <h2 class="card-title font-normal"><i class="fa-solid fa-dollar-sign"></i>Price: ${pet.price || "No Data Available"}$</h2>
-    <div class="card-actions flex lg:gap-10 py-3">
+    <div class="card-actions flex lg:gap-5 py-3">
       <button onclick="clickLike('${pet.image}');" class="btn w-[50px] border-slate-400"><i class="fa-regular fa-thumbs-up"></i></button>
       <button onclick="adoptBtn(this)" class="btn lg:px-8 text-[#0E7A81] border-slate-400">Adopt</button>
       <button onclick="loadDetails(${pet.petId})" class="btn lg:px-5 text-[#0E7A81] border-slate-400">Details</button>
