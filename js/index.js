@@ -41,37 +41,44 @@ const loadDetails = async(id) =>{
     const data = await res.json();
     displayDetails(data.petData);
 }
-const adoptBtn = () =>{
+const adoptBtn = (button) => {
     const btnContainer = document.getElementById("Adopt");
     some();
-    document.getElementById("adoptModal").showModal();
+    button.disabled = true;
+    button.innerHTML =`
+    <button>Adopted</button>
+    `
+    document.getElementById("adoptModal").showModal(); 
 }
-    const some = () => {
-        const countdown = (seconds) => {
-          const countdownElement = document.getElementById('Adopt');
-          const countdown = document.getElementById('adoptCount');
-          const interval = setInterval(() => {
+
+const some = () => {
+    const countdown = (seconds) => {
+        const countdownElement = document.getElementById('Adopt');
+        countdownElement.innerHTML = "";
+        const adoptModal = document.getElementById('adoptModal'); 
+        const interval = setInterval(() => {
             if (seconds >= 0) {
-              countdownElement.innerHTML = `
+                countdownElement.innerHTML = `
        <figure>
-    <img id="im" class="h-[250px] mx-auto py-2 rounded-s-xl"
-      src="https://img.freepik.com/premium-vector/flat-style-background-business-handshake_1104738-186.jpg"
-      alt="Shoes" />
-  </figure>
-           <div>
-           <h1 class="text-5xl font-bold flex justify-center">${seconds}</h1>
-           </div>
-           `;
-              seconds--;
+        <img id="im" class="h-[100px] mx-auto py-2 rounded-s-xl"
+            src="https://img.freepik.com/premium-vector/flat-style-background-business-handshake_1104738-186.jpg"
+            alt="Shoes" />
+      </figure>
+       <div>
+           <h1 class="text-3xl font-bold flex justify-center">Congrates</h1>
+           <h1 class="text-lg font-bold flex justify-center">Adoption process is start For your pet</h1>
+           <h1 class="text-2xl font-bold flex justify-center">${seconds}</h1>
+       </div>
+       `;
+                seconds--;
             } else {
-              clearInterval(interval);
-            //   button.textContent = "Adopted";
-              countdown.classList.add("hidden");
+                clearInterval(interval);
+                adoptModal.close(); 
             }
-          }, 1000); // 1000 milliseconds = 1 second
-        };
-        countdown(3); // Call the countdown with 10 seconds (you can change this number)
-      };    
+        }, 1000); 
+    };
+    countdown(3); 
+};
 
 const displayDetails = (petData) => {
     console.log(petData);
@@ -150,7 +157,7 @@ const displayCards = (pets) => {
     <h2 class="card-title font-normal"><i class="fa-solid fa-dollar-sign"></i>Price: ${pet.price || "No Data Available"}$</h2>
     <div class="card-actions flex lg:gap-10 py-3">
       <button onclick="clickLike('${pet.image}');" class="btn w-[50px] border-slate-400"><i class="fa-regular fa-thumbs-up"></i></button>
-      <button onclick="adoptBtn()" class="btn lg:px-8 text-[#0E7A81] border-slate-400">Adopt</button>
+      <button onclick="adoptBtn(this)" class="btn lg:px-8 text-[#0E7A81] border-slate-400">Adopt</button>
       <button onclick="loadDetails(${pet.petId})" class="btn lg:px-5 text-[#0E7A81] border-slate-400">Details</button>
     </div>
   </div>
