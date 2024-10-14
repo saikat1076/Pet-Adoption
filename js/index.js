@@ -1,10 +1,12 @@
 const clickBtn = () => {
-    const clear = document.getElementById("sec1");
-    // clear.innerHTML = ``;
     document.getElementById('spinner').style.display = "block";
+       
+     document.getElementById("sec1").classList.add("hidden")
     setTimeout(function () {
-        
-        loadCategoryCard(category)
+        document.getElementById('spinner').style.display = "none";
+
+        document.getElementById("sec1").classList.remove("hidden")
+        loadCategoryCard(category);
     },2000);    
 }
 const removeActiveClass = () => {
@@ -170,7 +172,6 @@ const displayCards = (pets) => {
 `
     cardContainer.append(card) 
         });
-        document.getElementById('spinner').style.display = "none";
 }
 
 const clickLike = (image) =>{
@@ -192,47 +193,6 @@ document.getElementById("sortBtn").addEventListener("click", () => {
         displayCards(sortedPets);
     }
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 loadBtn();
 loadCards();
