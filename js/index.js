@@ -118,7 +118,11 @@ const displayBtn = (categories) =>{
 const loadCards = () =>{
     fetch("https://openapi.programming-hero.com/api/peddy/pets")
     .then((res) => res.json())
-    .then((data) => displayCards(data.pets))
+    .then((data) => {
+        
+        currentPets = [...data.pets];
+        displayCards(data.pets)
+    })
     .catch((error) => console.log(error));
 };
 
@@ -141,6 +145,8 @@ const displayCards = (pets) => {
         }
         pets.forEach((pet) => {
             console.log(pet);
+            console.log(pet.breed, pet.price);
+            
             const card = document.createElement("div")
             card.classList = "card border-solid border border-slate-200"
             card.innerHTML = 
@@ -179,7 +185,13 @@ const clickLike = (image) =>{
     card3.append(imgContainer);
 }
 
-
+document.getElementById("sortBtn").addEventListener("click", () => {
+    if (currentPets.length > 0) {
+        const sortedPets = currentPets.sort((a, b) => 
+            b.price - a.price);
+        displayCards(sortedPets);
+    }
+})
 
 
 
@@ -224,4 +236,5 @@ const clickLike = (image) =>{
 
 loadBtn();
 loadCards();
+loadPets();
 
