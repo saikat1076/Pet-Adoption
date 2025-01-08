@@ -50,12 +50,14 @@
 
 2. Install dependencies:
 
-npm install
+   ```bash
+   <npm install>
 
 
 3. Start the development server:
 
-npm start
+   ```bash
+   <npm start>
 
 
 
@@ -64,6 +66,7 @@ Your app will be available at http://localhost:3000.
 
 ---
 
-##🌐 Live Link
+
+🌐 Live Link
 
 Check out the live version of the project [here](http://unique-b-10-assignment6.surge.sh)
